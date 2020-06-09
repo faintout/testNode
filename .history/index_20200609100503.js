@@ -1,0 +1,71 @@
+const { selectTable, pool, Result, addTbale } = require("./connect");
+const Router = require("koa-router");
+const router = new Router();
+
+router.get("/", (ctx, next) => {
+  ctx.body = "<h1>服务器请求成功</h1>";
+});
+// router.get("/get/:id", (ctx, next) => {
+//   // ctx.body = 'hello Koa!'
+//   let id = ctx.params.id;
+//   ctx.body = id;
+// });
+
+//学生信息
+router.post("/getstudent", async (ctx, next) => {
+  console.log("/getstudents");
+  ctx.body = await selectTable("students");
+});
+
+//商品信息
+router.post("/getshopes", async (ctx, next) => {
+  console.log("/getshopes");
+  ctx.body = await selectTable("shopes");
+});
+
+//工人信息
+router.post("/getworker", async (ctx, next) => {
+  console.log("/getworker");
+  ctx.body = await selectTable("worker");
+});
+//测试用
+router.post("/gettest", async (ctx, next) => {
+  console.log("/gettest");
+  ctx.body = await selectTable("test");
+});
+
+//add
+router.put("/addtest", async (ctx, next) => {
+  console.log("/addtest");
+  ctx.body = await addTbale("test", ctx);
+});
+
+//添加学生信息
+router.put("/addstudent", async (ctx, next) => {
+  console.log("res.request.body", ctx.request.body);
+  console.log("/addstudent");
+  ctx.body = await addTbale("students", ctx);
+});
+
+// router.use((req, res, next) => {
+//   console.log("路由器执行成功！");
+//   next();
+// });
+// router.get("/", (req, res) => {
+//   res.send("<h1>服务器请求成功</h1>");
+// });
+
+// router.post("/getworker", (req, res) => {
+//   console.log("/getworker");
+//   selectTable("worker", res);
+// });
+// router.post("/getshopes", (req, res) => {
+//   console.log("/getshopes");
+//   selectTable("shopes", res);
+// });
+router.put("/addstudent", (req, res) => {
+  console.log("/addstudent");
+  //   console.log(res);
+  addTbale(res);
+});
+module.exports = router;
