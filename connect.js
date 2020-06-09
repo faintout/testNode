@@ -28,9 +28,11 @@ function selectTable(value) {
           code = e.code;
           msg = "处理失败" + e.sqlMessage || "";
         }
-        return res(new Result({ code, msg, data: {total:30,data:r}, success: succ }))
+        msg = "处理成功"
+        succ = true
+        code = 200;
+        return res(new Result({ code, msg, data : r, success: succ }))
       });
-
       conn.release();
     });
   });
